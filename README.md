@@ -57,7 +57,9 @@ Then build and start it:
 docker compose up -d --build
 ```
 
-Open `http://<host>:9000` and sign in as `admin` with the password you set. The full
+Open `http://<host>:9000` and sign in as `admin` with the password you set. To change the
+password later, run `./set-password.sh`: editing `.env` alone does not affect a running
+container. The full
 walkthrough, including upgrades and running behind a reverse proxy, is in
 [docs/installation.md](docs/installation.md).
 
@@ -150,6 +152,10 @@ All settings are environment variables, read from `.env` by the compose file.
 | `DRYDOCK_PROJECTS_ROOT` | *(required)* | Directory scanned for projects. Mounted read-only. |
 | `DRYDOCK_DATA` | *(required)* | Absolute host path for metrics history, exports and imported projects. |
 
+Settings are read when the container is created, so after editing `.env` run
+`docker compose up -d` to apply them. For the password there is a script that does both
+steps: `./set-password.sh` (or `./set-password.sh --generate` for a random one).
+
 Both paths are mounted into the container at the same path they have on the host. That is
 deliberate: see [docs/architecture.md](docs/architecture.md#same-path-mounts).
 
@@ -157,7 +163,7 @@ deliberate: see [docs/architecture.md](docs/architecture.md#same-path-mounts).
 
 | Guide | What it covers |
 |---|---|
-| [Installation](docs/installation.md) | Requirements, setup, upgrading, backups, reverse proxy, uninstalling. |
+| [Installation](docs/installation.md) | Requirements, setup, changing the password, upgrading, backups, reverse proxy, uninstalling. |
 | [User guide](docs/user-guide.md) | Every view and action in the console. |
 | [Import and export](docs/import-export.md) | Projects, bundles, image archives, Git, and the bundle format. |
 | [API reference](docs/api.md) | The HTTP API the console itself uses. |

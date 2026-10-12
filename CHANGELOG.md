@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.1 - 2026-10-12
+
+- Added `set-password.sh`, which changes the console password and re-creates the container
+  so the change takes effect. Editing `.env` alone never affected a running container; the
+  documentation now says so plainly.
+- CPU charts no longer repeat axis labels when usage is very low.
+- The compose file inside a bundle now references the image the bundle actually contains.
+- Screenshots retaken on a demonstration host.
+
 ## 1.0.0 - 2026-10-12
 
 First release.

@@ -50,7 +50,7 @@ Be clear about the gaps.
 ## Recommended deployment
 
 1. **Use a long, random password** and keep `.env` readable only by you
-   (`chmod 600 .env`).
+   (`chmod 600 .env`). `./set-password.sh --generate` creates and applies one.
 2. **Keep the port off the internet.** Do not forward it on your router.
 3. **Add TLS** with a reverse proxy when anyone else shares the network, and publish
    Drydock on loopback so the proxy is the only way in. See

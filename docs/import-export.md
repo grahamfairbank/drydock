@@ -159,7 +159,7 @@ source/<project>/       the project directory, when requested
   "format": "drydock-bundle/1",
   "created": 1791827120.22,
   "drydock": "1.0.0",
-  "host": "pier",
+  "host": "harbor-01",
   "source": null,
   "containers": [
     {

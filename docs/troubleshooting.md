@@ -28,12 +28,29 @@ Rootless Docker and some desktop installations keep it elsewhere. Find it with
 
 ### "Cannot complete login due to an incorrect user name or password"
 
-The credentials are the ones in `.env` **at the time the container was created**. After
-editing `.env`, run `docker compose up -d` so the container is re-created with the new
-values. Check what the running container has with:
+The credentials are the ones in `.env` **at the time the container was created**. See the
+next entry if you have changed them since. Check which user name the running container
+has with:
 
 ```bash
 docker exec drydock printenv DRYDOCK_USER
+```
+
+### I changed the password in `.env` but the old one still works
+
+Editing `.env` does not reach a running container: Drydock is handed its password when the
+container is created and keeps that value until it is re-created. Restarting the container
+is not enough either. Apply the change with:
+
+```bash
+docker compose up -d
+```
+
+Next time, use the bundled script, which updates `.env` and re-creates the container in one
+step:
+
+```bash
+./set-password.sh
 ```
 
 ### Signed out unexpectedly

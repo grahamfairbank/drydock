@@ -45,7 +45,9 @@ The build downloads the base image and three Alpine packages; nothing else is fe
    - `DRYDOCK_DATA` must be an **absolute path on the host**. The directory is created on
      first start. It may sit inside the projects root.
 
-   Keep `.env` private: `chmod 600 .env`.
+   Keep `.env` private: `chmod 600 .env`. To change the password later, use
+   `./set-password.sh` rather than editing the file; see
+   [Changing the password](#changing-the-password).
 
 4. Build and start.
 
@@ -70,15 +72,37 @@ Trends page becomes meaningful after a few hours.
 The container restarts automatically with the host (`restart: unless-stopped`) and reports
 its health on `/healthz`.
 
-## Changing settings
+## Changing the password
 
-Edit `.env`, then apply:
+Run the script that ships with Drydock, from the project directory:
+
+```bash
+./set-password.sh
+```
+
+It asks for the new password twice, writes it to `.env` and re-creates the container so it
+takes effect. To have a strong random password generated and printed instead:
+
+```bash
+./set-password.sh --generate
+```
+
+Passwords need at least 8 characters and cannot contain single quotes or backslashes.
+Everyone who is signed in has to sign in again afterwards.
+
+**Editing `.env` by hand is not enough on its own.** Drydock receives its password as an
+environment variable when its container is created, and a running container keeps the
+value it started with. If you change `.env` in an editor, apply it yourself:
 
 ```bash
 docker compose up -d
 ```
 
-Changing the password this way signs everyone out.
+## Changing other settings
+
+The same rule applies to every setting: edit `.env`, then run `docker compose up -d` so
+the container is re-created with the new values. A plain `docker restart drydock` does
+**not** pick up changes.
 
 ## Running behind a reverse proxy
 
