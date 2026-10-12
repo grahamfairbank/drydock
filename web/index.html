@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Drydock Host Client</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%230079b8'/%3E%3Cpath d='M8 3 3.5 5.5v5L8 13l4.5-2.5v-5zM3.5 5.5 8 8l4.5-2.5M8 8v5' fill='none' stroke='%23fff' stroke-width='1.2' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-host" viewBox="0 0 16 16"><rect x="2" y="2" width="12" height="5" rx="1"/><rect x="2" y="9" width="12" height="5" rx="1"/><path d="M4.5 4.5h.01M4.5 11.5h.01M7 4.5h4M7 11.5h4"/></symbol>
+    <symbol id="i-box" viewBox="0 0 16 16"><path d="M8 1.8 2.5 4.8v6.4L8 14.2l5.5-3V4.8zM2.5 4.8 8 7.8l5.5-3M8 7.8v6.4"/></symbol>
+    <symbol id="i-db" viewBox="0 0 16 16"><ellipse cx="8" cy="4" rx="5" ry="2"/><path d="M3 4v8c0 1.1 2.2 2 5 2s5-.9 5-2V4M3 8c0 1.1 2.2 2 5 2s5-.9 5-2"/></symbol>
+    <symbol id="i-net" viewBox="0 0 16 16"><rect x="6" y="2" width="4" height="3.5" rx=".5"/><rect x="1.5" y="10.5" width="4" height="3.5" rx=".5"/><rect x="10.5" y="10.5" width="4" height="3.5" rx=".5"/><path d="M8 5.5V8M3.5 10.5V8h9v2.5"/></symbol>
+    <symbol id="i-folder" viewBox="0 0 16 16"><path d="M1.8 4.2c0-.6.4-1 1-1h3l1.4 1.6h6c.6 0 1 .4 1 1v6c0 .6-.4 1-1 1H2.8c-.6 0-1-.4-1-1z"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 16 16"><path d="M2 2v12h12M4.5 10.5l2.8-3.2 2.2 2 3.5-4.8"/></symbol>
+    <symbol id="i-gear" viewBox="0 0 16 16"><circle cx="8" cy="8" r="2.2"/><path d="M8 1.5v2M8 12.5v2M1.5 8h2M12.5 8h2M3.4 3.4l1.4 1.4M11.2 11.2l1.4 1.4M3.4 12.6l1.4-1.4M11.2 4.8l1.4-1.4"/></symbol>
+    <symbol id="i-play" viewBox="0 0 16 16"><path d="M4.5 2.8v10.4L13 8z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-stop" viewBox="0 0 16 16"><rect x="3.5" y="3.5" width="9" height="9" rx="1" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 16 16"><path d="M4 3h3v10H4zM9 3h3v10H9z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-restart" viewBox="0 0 16 16"><path d="M13 8a5 5 0 1 1-1.6-3.7M13 2.5v3h-3"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 16 16"><path d="M13.5 6.5A5.6 5.6 0 0 0 3 6M2.5 9.500A5.6 5.6 0 0 0 13 10M13.5 3v3.500h-3.500M2.500 13V9.500H6"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 16 16"><path d="M8 3v10M3 8h10"/></symbol>
+    <symbol id="i-term" viewBox="0 0 16 16"><rect x="1.5" y="2.5" width="13" height="11" rx="1"/><path d="M4 6l2.500 2L4 10M8 10.500h3.500"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 16 16"><path d="M2.500 4.500h11M6 4.500V3h4v1.500M4 4.500l.6 8.500h6.800l.6-8.500M6.700 7v3.500M9.300 7v3.500"/></symbol>
+    <symbol id="i-down" viewBox="0 0 16 16"><path d="M8 2v8M4.500 7 8 10.500 11.500 7M2.500 13.500h11"/></symbol>
+    <symbol id="i-up" viewBox="0 0 16 16"><path d="M8 10.500v-8M4.500 6 8 2.500 11.500 6M2.500 13.500h11"/></symbol>
+    <symbol id="i-cam" viewBox="0 0 16 16"><path d="M1.800 5c0-.6.4-1 1-1h2l1-1.500h4.400l1 1.500h2c.6 0 1 .4 1 1v7c0 .6-.4 1-1 1H2.800c-.6 0-1-.4-1-1z"/><circle cx="8" cy="8.500" r="2.300"/></symbol>
+    <symbol id="i-warn" viewBox="0 0 16 16"><path d="M8 2 1.500 13.500h13zM8 6.500v3.500M8 11.800h.01"/></symbol>
+    <symbol id="i-ok" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/><path d="M5.200 8.200l2 2 3.600-4"/></symbol>
+    <symbol id="i-x" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/><path d="M5.800 5.800l4.400 4.400M10.200 5.800l-4.400 4.400"/></symbol>
+    <symbol id="i-user" viewBox="0 0 16 16"><circle cx="8" cy="5.500" r="2.700"/><path d="M2.800 14c.5-2.800 2.600-4.200 5.200-4.200s4.700 1.400 5.200 4.200"/></symbol>
+    <symbol id="i-help" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6"/><path d="M6.300 6.300c.2-1 1-1.500 1.800-1.500 1 0 1.800.7 1.800 1.600 0 1.300-1.800 1.400-1.800 2.800M8.100 11.300h.01"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 16 16"><path d="M2.500 13.500l.6-3L10.800 2.800l2.400 2.400-7.700 7.700zM9.300 4.300l2.400 2.400"/></symbol>
+    <symbol id="i-file" viewBox="0 0 16 16"><path d="M4 1.800h5.500L12.500 5v9.200h-8.500zM9.300 1.800V5h3.200M6 8h4.500M6 10.500h4.500"/></symbol>
+    <symbol id="i-list" viewBox="0 0 16 16"><path d="M5.500 4h8M5.500 8h8M5.500 12h8M2.500 4h.01M2.500 8h.01M2.500 12h.01"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 16 16"><path d="M4 6l4 4 4-4"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 16 16"><path d="M9 1.500 3.500 9H8l-1 5.500L12.500 7H8z"/></symbol>
+  </defs>
+</svg>
+
+<div id="login" hidden>
+  <div class="login-box">
+    <div class="login-brand">
+      <div><h1><b>Drydock</b></h1><p>Container Host Client</p></div>
+      <svg class="i"><use href="#i-box"/></svg>
+    </div>
+    <form class="login-form" id="login-form" autocomplete="on">
+      <div><label for="lu">User name</label><input id="lu" type="text" name="username" autocomplete="username" required></div>
+      <div><label for="lp">Password</label><input id="lp" type="password" name="password" autocomplete="current-password" required></div>
+      <div class="login-err" id="login-err"></div>
+      <div style="text-align:right"><button class="btn primary" type="submit">Log in</button></div>
+    </form>
+  </div>
+</div>
+
+<div id="app" hidden>
+  <header id="hdr">
+    <div class="brand"><svg class="i"><use href="#i-box"/></svg><span><b>Drydock</b></span><small>Host Client</small></div>
+    <div class="sp"></div>
+    <a class="hbtn alarm" id="h-alarm" href="#/host" hidden></a>
+    <button class="hbtn" id="h-user"><svg class="i"><use href="#i-user"/></svg><span id="h-user-t"></span><svg class="i"><use href="#i-chev"/></svg></button>
+    <span class="sep opt"></span>
+    <button class="hbtn opt" id="h-help"><svg class="i"><use href="#i-help"/></svg>Help<svg class="i"><use href="#i-chev"/></svg></button>
+    <span class="sep opt"></span>
+    <input class="opt" id="h-search" type="search" placeholder="Search containers" aria-label="Search containers">
+  </header>
+  <div id="main">
+    <nav id="nav"></nav>
+    <section id="content">
+      <div id="title"></div>
+      <div id="view"></div>
+    </section>
+  </div>
+  <div id="tasks">
+    <div class="t-h" id="tasks-h"><svg class="i"><use href="#i-list"/></svg>Recent tasks <span class="n" id="tasks-n"></span><span class="sp"></span><svg class="i" id="tasks-chev"><use href="#i-chev"/></svg></div>
+    <div class="t-body" id="tasks-body"></div>
+  </div>
+</div>
+<div id="overlay" hidden></div>
+<div id="menu" hidden></div>
+<div id="toasts"></div>
+<script src="app.js"></script>
+<script src="views.js"></script>
+</body>
+</html>

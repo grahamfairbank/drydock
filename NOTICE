@@ -1,0 +1,25 @@
+Drydock
+Copyright 2026 Graham Fairbank
+
+Licensed under the MIT License (see LICENSE).
+
+Drydock is an independent project. It is not affiliated with, endorsed,
+sponsored or supported by Docker, Inc., Broadcom Inc. or VMware. Docker is a
+trademark of Docker, Inc. VMware and ESXi are trademarks of Broadcom Inc.
+and/or its subsidiaries. These names are used only to describe what Drydock
+works with and what its layout resembles. Drydock contains no code or assets
+from any of those products.
+
+Third-party components
+----------------------
+
+xterm.js (https://github.com/xtermjs/xterm.js), versions 5.5.0 (@xterm/xterm)
+and 0.10.0 (@xterm/addon-fit), distributed unmodified in web/vendor/.
+  Copyright (c) 2017-2019, The xterm.js authors
+  Copyright (c) 2014-2016, SourceLair Private Company
+  Copyright (c) 2012-2013, Christopher Jeffrey
+  MIT License. The full text is in web/vendor/LICENSE-xterm.txt.
+
+The container image is built on the official Docker CLI image (docker:29-cli),
+which provides the Docker CLI, Compose and Buildx under the Apache License 2.0,
+and adds Python, Git and tini from Alpine Linux under their own licences.

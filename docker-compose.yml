@@ -1,0 +1,26 @@
+# Build and run Drydock:
+#   docker compose up -d --build
+# Settings live in .env (see .env.example).
+services:
+  drydock:
+    build: .
+    image: drydock:latest
+    container_name: drydock
+    restart: unless-stopped
+    ports:
+      - "${DRYDOCK_PORT:-9000}:9000"
+    environment:
+      DRYDOCK_USER: ${DRYDOCK_USER:-admin}
+      DRYDOCK_PASSWORD: ${DRYDOCK_PASSWORD:?set DRYDOCK_PASSWORD in .env}
+      DRYDOCK_PROJECTS_ROOT: ${DRYDOCK_PROJECTS_ROOT:?set DRYDOCK_PROJECTS_ROOT in .env}
+      DRYDOCK_DATA: ${DRYDOCK_DATA:?set DRYDOCK_DATA in .env}
+    volumes:
+      # Drydock manages the local Docker engine through its socket.
+      - /var/run/docker.sock:/var/run/docker.sock
+      # Host metrics (CPU, memory, network) are read from the host's /proc.
+      - /proc:/host/proc:ro
+      # Project directories and the data store are mounted at the SAME path
+      # as on the host, so compose files with relative bind mounts resolve
+      # identically whether deployed from a shell or from Drydock.
+      - ${DRYDOCK_PROJECTS_ROOT}:${DRYDOCK_PROJECTS_ROOT}:ro
+      - ${DRYDOCK_DATA}:${DRYDOCK_DATA}
