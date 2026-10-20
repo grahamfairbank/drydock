@@ -13,7 +13,7 @@ import zipfile
 from . import dockerapi as d
 from . import store
 
-VERSION = "1.0.1"
+VERSION = "1.0.0"
 DATA = store.DATA
 ROOT = os.path.realpath(store.ROOT)
 EXPORTS = os.path.join(DATA, "exports")
